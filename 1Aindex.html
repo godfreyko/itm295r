@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Website - Course Description & Outcomes</title>
+    <link rel="stylesheet" href="style/common.css">
+    <link rel="stylesheet" href="1Astyle.css">
+</head>
+<body>
+    <div class="progress-bar" id="progressBar"></div>
+    
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div>
+                    <div class="course-title">ITM 295</div>
+                    <div class="course-subtitle">ITM 295R Portfolio Service Project / CIT 295 Practicum</div>
+                </div>
+                <div class="semester-info">
+                    <div>Spring 2025</div>
+                    <div>Kory Godfrey</div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <nav class="index-nav">
+        <div class="index-title">Course Navigation</div>
+        <a href="1Aindex.html" class="index-item" data-section="description">Course Description & Outcomes</a>
+        <a href="2projectReq.html" class="index-item" data-section="proposal-requirements">Project Proposal Requirements</a>
+        <a href="3workReq.html" class="index-item" data-section="coursework">Course Work Requirements</a>
+        <a href="4grading.html" class="index-item" data-section="grading">Grading</a>
+        <a href="5idea_example.html" class="index-item" data-section="project-ideas">Project Idea Examples</a>
+        <a href="5example_prop.html" class="index-item" data-section="proposal-examples">Project Proposal Examples</a>
+        <a href="5example_finalrep.html" class="index-item" data-section="report-examples">Project Report Examples</a>
+        <a href="6service.html" class="index-item" data-section="service">Service Opportunities</a>
+    </nav>
+    <div class="main-content">
+        <div class="container">
+            <section id="description" class="section hero visible">
+                <h1>ITM 295R</h1>
+                <p class="subtitle">Project-Based Learning Experience</p>
+                <p class="description">This course emphasizes hands-on project development and real-world application of course concepts through individual and collaborative work.</p>
+            </section>
+
+            <section id="description-details" class="section">
+                <h2>Course Description and Learning Outcomes (CLOs)</h2>
+                
+                <h3>Course Description</h3>
+                <p>This project-focused course provides students with opportunities to apply theoretical knowledge through practical, hands-on projects. Students will develop critical thinking, problem-solving, and project management skills while working on real-world challenges in their field of study.</p>
+                
+                <h3>Course Learning Outcomes (CLOs)</h3>
+                <p>Upon successful completion of this course, students will be able to:</p>
+                <ul>
+                    <li><strong>CLO 1:</strong> Identify and analyze complex problems within the field and propose innovative solutions</li>
+                    <li><strong>CLO 2:</strong> Design and execute comprehensive project proposals with clear objectives and methodologies</li>
+                    <li><strong>CLO 3:</strong> Apply project management principles to complete projects within specified timelines and constraints</li>
+                    <li><strong>CLO 4:</strong> Communicate project findings effectively through written reports and oral presentations</li>
+                    <li><strong>CLO 5:</strong> Collaborate effectively with team members and stakeholders throughout the project lifecycle</li>
+                    <li><strong>CLO 6:</strong> Evaluate project outcomes and reflect on lessons learned for continuous improvement</li>
+                </ul>
+            </section>
+        </div>
+    </div>
+
+    <script>
+        // Progress bar
+        function updateProgressBar() {
+            const scrollTop = window.pageYOffset;
+            const docHeight = document.body.offsetHeight - window.innerHeight;
+            const scrollPercent = (scrollTop / docHeight) * 100;
+            document.getElementById('progressBar').style.width = scrollPercent + '%';
+        }
+
+        // Highlight active navigation item based on current page
+        function setActiveNavItem() {
+            const path = window.location.pathname;
+            const filename = path.split('/').pop(); // Gets 'description.html' or 'index.html'
+
+            // Special handling for index.html if it's your default "home" page
+            let currentDataSection = '';
+            if (filename === '' || filename === 'index.html' || filename === 'description.html') {
+                currentDataSection = 'description'; // Assuming 'description' is your landing content
+            } else {
+                currentDataSection = filename.replace('.html', '');
+            }
+            
+            const navItems = document.querySelectorAll('.index-item');
+            navItems.forEach(item => {
+                item.classList.remove('active');
+                if (item.getAttribute('data-section') === currentDataSection) {
+                    item.classList.add('active');
+                }
+            });
+        }
+
+        // Initial setup
+        window.addEventListener('load', () => {
+            setActiveNavItem();
+            updateProgressBar(); // Also update on load in case of short pages
+        });
+
+        window.addEventListener('scroll', updateProgressBar);
+    </script>
+</body>
+</html>
