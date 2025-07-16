@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Website - Grading</title>
+    <link rel="stylesheet" href="4grading.css">
+
+</head>
+<body>
+    <div class="progress-bar" id="progressBar"></div>
+    
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div>
+                    <div class="course-title">ITM 295</div>
+                    <div class="course-subtitle">ITM 295R Portfolio Service Project / CIT 295 Practicum</div>
+                </div>
+                <div class="semester-info">
+                    <div>Spring 2025</div>
+                    <div>Kory Godfrey</div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <nav class="index-nav">
+        <div class="index-title">Course Navigation</div>
+        <a href="1Aindex.html" class="index-item" data-section="description">Course Description & Outcomes</a>
+        <a href="2projectReq.html" class="index-item" data-section="proposal-requirements">Project Proposal Requirements</a>
+        <a href="3workReq.html" class="index-item" data-section="coursework">Course Work Requirements</a>
+        <a href="4grading.html" class="index-item" data-section="grading">Grading</a>
+        <a href="5idea_example.html" class="index-item" data-section="project-ideas">Project Idea Examples</a>
+        <a href="5example_prop.html" class="index-item" data-section="proposal-examples">Project Proposal Examples</a>
+        <a href="5example_finalrep.html" class="index-item" data-section="report-examples">Project Report Examples</a>
+        <a href="6service.html" class="index-item" data-section="service">Service Opportunities</a>
+    </nav>
+
+    <div class="main-content">
+        <div class="container">
+            <section id="grading" class="section visible">
+                <h2>Grading</h2>
+                
+                <h3>Grade Distribution</h3>
+                <table class="schedule-table">
+                    <thead>
+                        <tr>
+                            <th>Assignment</th>
+                            <th>Weight</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Project Proposal</td>
+                            <td>20%</td>
+                            <td>Initial project plan and research</td>
+                        </tr>
+                        <tr>
+                            <td>Progress Reports (2)</td>
+                            <td>20%</td>
+                            <td>Mid-semester project updates</td>
+                        </tr>
+                        <tr>
+                            <td>Final Project Report</td>
+                            <td>30%</td>
+                            <td>Complete project documentation</td>
+                        </tr>
+                        <tr>
+                            <td>Final Presentation</td>
+                            <td>15%</td>
+                            <td>Oral presentation of results</td>
+                        </tr>
+                        <tr>
+                            <td>Class Participation</td>
+                            <td>10%</td>
+                            <td>Engagement and peer feedback</td>
+                        </tr>
+                        <tr>
+                            <td>Reflection Essays</td>
+                            <td>5%</td>
+                            <td>Learning outcome connections</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <h3>Grading Scale</h3>
+                <div class="info-grid">
+                    <div class="info-card">
+                        <h4>A Range</h4>
+                        <p>A: 93-100%<br>A-: 90-92%</p>
+                    </div>
+                    <div class="info-card">
+                        <h4>B Range</h4>
+                        <p>B+: 87-89%<br>B: 83-86%<br>B-: 80-82%</p>
+                    </div>
+                    <div class="info-card">
+                        <h4>C Range</h4>
+                        <p>C+: 77-79%<br>C: 73-76%<br>C-: 70-72%</p>
+                    </div>
+                    <div class="info-card">
+                        <h4>D/F Range</h4>
+                        <p>D: 60-69%<br>F: Below 60%</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <script>
+        // Progress bar
+        function updateProgressBar() {
+            const scrollTop = window.pageYOffset;
+            const docHeight = document.body.offsetHeight - window.innerHeight;
+            // Prevent division by zero if content is shorter than viewport
+            if (docHeight === 0) {
+                document.getElementById('progressBar').style.width = '100%';
+                return;
+            }
+            const scrollPercent = (scrollTop / docHeight) * 100;
+            document.getElementById('progressBar').style.width = scrollPercent + '%';
+        }
+
+        // Highlight active navigation item based on current page
+        function setActiveNavItem() {
+            const path = window.location.pathname;
+            const filename = path.split('/').pop(); // Gets 'grading.html' etc.
+
+            let currentDataSection = '';
+            // Determine the data-section based on the filename
+            if (filename === '' || filename === 'index.html' || filename === 'description.html') {
+                currentDataSection = 'description'; 
+            } else {
+                currentDataSection = filename.replace('.html', '');
+            }
+            
+            const navItems = document.querySelectorAll('.index-item');
+            navItems.forEach(item => {
+                item.classList.remove('active');
+                if (item.getAttribute('data-section') === currentDataSection) {
+                    item.classList.add('active');
+                }
+            });
+        }
+
+        // Initial setup on page load
+        window.addEventListener('load', () => {
+            setActiveNavItem();
+            updateProgressBar(); // Update on load in case of short pages
+            // For sections that might be present and need 'visible' on page load
+            const sections = document.querySelectorAll('.section');
+            sections.forEach(section => {
+                section.classList.add('visible'); // Make all sections visible on page load for a single-section page
+            });
+        });
+
+        // Update progress bar on scroll
+        window.addEventListener('scroll', updateProgressBar);
+    </script>
+</body>
+</html>

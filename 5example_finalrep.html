@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Website - Report Examples</title>
+    <link rel="stylesheet" href="5example_finalrep.css">
+</head>
+<body>
+    <div class="progress-bar" id="progressBar"></div>
+    
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div>
+                    <div class="course-title">ITM 295</div>
+                    <div class="course-subtitle">ITM 295R Portfolio Service Project / CIT 295 Practicum</div>
+                </div>
+                <div class="semester-info">
+                    <div>Spring 2025</div>
+                    <div>Kory Godfrey</div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <nav class="index-nav">
+        <div class="index-title">Course Navigation</div>
+        <a href="1Aindex.html" class="index-item" data-section="description">Course Description & Outcomes</a>
+        <a href="2projectReq.html" class="index-item" data-section="proposal-requirements">Project Proposal Requirements</a>
+        <a href="3workReq.html" class="index-item" data-section="coursework">Course Work Requirements</a>
+        <a href="4grading.html" class="index-item" data-section="grading">Grading</a>
+        <a href="5idea_example.html" class="index-item" data-section="project-ideas">Project Idea Examples</a>
+        <a href="5example_prop.html" class="index-item" data-section="proposal-examples">Project Proposal Examples</a>
+        <a href="5example_finalrep.html" class="index-item" data-section="report-examples">Project Report Examples</a>
+        <a href="6service.html" class="index-item" data-section="service">Service Opportunities</a>
+    </nav>
+
+    <div class="main-content">
+        <div class="container">
+            <section id="report-examples" class="section visible">
+                <h2>ITM 295 Portfolio Service Project Purpose</h2>
+                
+                <p>ITM 295 Portfolio Service Project engages students in service-learning opportunities to bless other lives by using the skills and knowledge they gained through their course of study in their degree program. It is designed to help students achieve the mission of BYU-Idaho to – "develop disciples of Jesus Christ who are leaders in their homes, the Church, and their communities" (University Mission Statement).</p>
+                
+                <div class="report-examples">
+                    <h3>Final Report Examples</h3>
+                    <ul class="report-list">
+                        <li><a href="#" onclick="return false;">Final Report for Ambitions of Idaho</a></li>
+                        <li><a href="#" onclick="return false;">Final Report for Caring Heart Child Care Center</a></li>
+                        <li><a href="#" onclick="return false;">Final Report for Mojave River Academy</a></li>
+                        <li><a href="#" onclick="return false;">Final Report for Aspen Grove Family Camp and Conference Center</a></li>
+                    </ul>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <script>
+        // Progress bar
+        function updateProgressBar() {
+            const scrollTop = window.pageYOffset;
+            const docHeight = document.body.offsetHeight - window.innerHeight;
+            // Prevent division by zero if content is shorter than viewport
+            if (docHeight === 0) {
+                document.getElementById('progressBar').style.width = '100%';
+                return;
+            }
+            const scrollPercent = (scrollTop / docHeight) * 100;
+            document.getElementById('progressBar').style.width = scrollPercent + '%';
+        }
+
+        // Highlight active navigation item based on current page
+        function setActiveNavItem() {
+            const path = window.location.pathname;
+            const filename = path.split('/').pop(); // Gets filename
+
+            let currentDataSection = '';
+            // Determine the data-section based on the filename
+            if (filename === '' || filename === 'index.html' || filename === 'description.html') {
+                currentDataSection = 'description'; 
+            } else if (filename === 'report-examples.html') {
+                currentDataSection = 'report-examples';
+            } else {
+                currentDataSection = filename.replace('.html', '');
+            }
+            
+            const navItems = document.querySelectorAll('.index-item');
+            navItems.forEach(item => {
+                item.classList.remove('active');
+                if (item.getAttribute('data-section') === currentDataSection) {
+                    item.classList.add('active');
+                }
+            });
+        }
+
+        // Initial setup on page load
+        window.addEventListener('load', () => {
+            setActiveNavItem();
+            updateProgressBar(); // Update on load in case of short pages
+            // For sections that might be present and need 'visible' on page load
+            const sections = document.querySelectorAll('.section');
+            sections.forEach(section => {
+                section.classList.add('visible'); // Make all sections visible on page load for a single-section page
+            });
+        });
+
+        // Update progress bar on scroll
+        window.addEventListener('scroll', updateProgressBar);
+    </script>
+</body>
+</html>
