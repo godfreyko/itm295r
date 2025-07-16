@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Website - Project Idea Examples </title>
+    <link rel="stylesheet" href="style/5idea_example.css">
+</head>
+<body>
+    <div class="progress-bar" id="progressBar"></div>
+    
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div>
+                    <div class="course-title">ITM 295</div>
+                    <div class="course-subtitle">ITM 295R Portfolio Service Project / CIT 295 Practicum</div>
+                </div>
+                <div class="semester-info">
+                    <div>Spring 2025</div>
+                    <div>Kory Godfrey</div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <nav class="index-nav">
+        <div class="index-title">Course Navigation</div>
+        <a href="1Aindex.html" class="index-item" data-section="description">Course Description & Outcomes</a>
+        <a href="2projectReq.html" class="index-item" data-section="proposal-requirements">Project Proposal Requirements</a>
+        <a href="3workReq.html" class="index-item" data-section="coursework">Course Work Requirements</a>
+        <a href="4grading.html" class="index-item" data-section="grading">Grading</a>
+        <a href="5idea_example.html" class="index-item" data-section="project-ideas">Project Idea Examples</a>
+        <a href="5example_prop.html" class="index-item" data-section="proposal-examples">Project Proposal Examples</a>
+        <a href="5example_finalrep.html" class="index-item" data-section="report-examples">Project Report Examples</a>
+        <a href="6service.html" class="index-item" data-section="service">Service Opportunities</a>
+    </nav>
+
+    <div class="main-content">
+        <div class="container">
+            <section id="project-ideas" class="section visible">
+                <h2>Project Idea Examples</h2>
+                <p>This section provides a list of example project ideas to inspire your own project. Feel free to adapt these or come up with something entirely new!</p>
+                
+                <h3>Sample Project Themes</h3>
+                <div class="assignment-grid">
+                    <div class="assignment-card">
+                        <h4>Educational Tool Development</h4>
+                        <p>Create an interactive web application or software tool to help students learn a specific concept (e.g., a math problem solver, a language learning game, a physics simulator).</p>
+                    </div>
+                    <div class="assignment-card">
+                        <h4>Data Analysis & Visualization</h4>
+                        <p>Analyze a publicly available dataset (e.g., climate data, social media trends, economic indicators) and present your findings using compelling visualizations and a written report.</p>
+                    </div>
+                    <div class="assignment-card">
+                        <h4>Community Service Application</h4>
+                        <p>Develop a mobile or web application that addresses a specific need in your local community (e.g., a volunteer matching platform, a local event calendar, a resource directory).</p>
+                    </div>
+                    <div class="assignment-card">
+                        <h4>Sustainability Initiative</h4>
+                        <p>Propose and design a project focused on environmental sustainability, such as a smart energy monitoring system, a waste reduction initiative, or a community garden planning tool.</p>
+                    </div>
+                    <div class="assignment-card">
+                        <h4>Health & Wellness Technology</h4>
+                        <p>Design a system or application to improve health and wellness, like a fitness tracker app, a medication reminder system, or a mental health support platform.</p>
+                    </div>
+                    <div class="assignment-card">
+                        <h4>Robotics & Automation</h4>
+                        <p>Explore a project involving robotics, automation, or IoT (Internet of Things), such as a simple home automation system, a robotic arm for a specific task, or a smart sensor network.</p>
+                    </div>
+                </div>
+
+                <h3>Brainstorming Tips</h3>
+                <ul>
+                    <li>**Identify a problem:** What real-world problem interests you? How can technology or research help solve it?</li>
+                    <li>**Leverage your interests:** What are you passionate about? Can you connect a project to a hobby, a social cause, or another academic discipline?</li>
+                    <li>**Explore current events:** Are there any recent advancements, challenges, or discussions that spark an idea?</li>
+                    <li>**Think about existing tools:** Can you improve upon an existing tool or service, or combine multiple ideas in a novel way?</li>
+                    <li>**Consider your skills:** What are you good at? What do you want to learn? Choose a project that challenges you but is also achievable within the semester.</li>
+                    <li>**Start small, then scale:** Don't try to solve the world's biggest problem on day one. Start with a core idea and consider how it could evolve.</li>
+                </ul>
+            </section>
+        </div>
+    </div>
+
+    <script>
+        // Progress bar
+        function updateProgressBar() {
+            const scrollTop = window.pageYOffset;
+            const docHeight = document.body.offsetHeight - window.innerHeight;
+            // Prevent division by zero if content is shorter than viewport
+            if (docHeight === 0) {
+                document.getElementById('progressBar').style.width = '100%';
+                return;
+            }
+            const scrollPercent = (scrollTop / docHeight) * 100;
+            document.getElementById('progressBar').style.width = scrollPercent + '%';
+        }
+
+        // Highlight active navigation item based on current page
+        function setActiveNavItem() {
+            const path = window.location.pathname;
+            const filename = path.split('/').pop(); // Gets 'project-ideas.html' etc.
+
+            let currentDataSection = '';
+            // Determine the data-section based on the filename
+            if (filename === '' || filename === 'index.html' || filename === 'description.html') {
+                currentDataSection = 'description'; 
+            } else {
+                currentDataSection = filename.replace('.html', '');
+            }
+            
+            const navItems = document.querySelectorAll('.index-item');
+            navItems.forEach(item => {
+                item.classList.remove('active');
+                if (item.getAttribute('data-section') === currentDataSection) {
+                    item.classList.add('active');
+                }
+            });
+        }
+
+        // Initial setup on page load
+        window.addEventListener('load', () => {
+            setActiveNavItem();
+            updateProgressBar(); // Update on load in case of short pages
+            // For sections that might be present and need 'visible' on page load
+            const sections = document.querySelectorAll('.section');
+            sections.forEach(section => {
+                section.classList.add('visible'); // Make all sections visible on page load for a single-section page
+            });
+        });
+
+        // Update progress bar on scroll
+        window.addEventListener('scroll', updateProgressBar);
+    </script>
+</body>
+</html>
